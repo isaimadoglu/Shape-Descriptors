@@ -24,15 +24,26 @@ for g = 2 : MaxGen
         % Mutation
         [child1]= mutation(child1, Pm);
         [child2]= mutation(child2, Pm);
-%         if ((sum(child1.Gene(:))+sum(child2.Gene(:)))==0)
-%            disp('hata'); 
-%         end
+        
+        while ((sum(child1.Gene(:))==0) || (sum(child2.Gene(:))==0))
+            % Crossover
+            crossoverName = 'single';
+            [child1, child2] = crossover(parent1, parent2, Pc, crossoverName);
+            
+            % Mutation
+            [child1]= mutation(child1, Pm);
+            [child2]= mutation(child2, Pm);
+            disp(['sifir']);
+        end
+        disp(['children', child1.Gene, child2.Gene]);
         newPopulation.Chromosomes(k).Gene = child1.Gene;
         newPopulation.Chromosomes(k+1).Gene = child2.Gene;
+        disp(['new pop chromosome', newPopulation.Chromosomes.Gene]);
         
-    end
+    end  % end of Chromosomes loop
     
     for i = 1 : M
+        testt= sum(newPopulation.Chromosomes(i).Gene(:))
         newPopulation.Chromosomes(i).fitness=obj(population.Chromosomes(i).Gene(:));
     end
     
@@ -41,7 +52,7 @@ for g = 2 : MaxGen
     
     population = newPopulation;
     
-end
+end   % end of Generation loop
 
 for i = 1 : M
     population.Chromosomes(i).fitness=obj(population.Chromosomes(i).Gene(:));
