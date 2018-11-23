@@ -4,7 +4,7 @@ clearvars; clc;
 
 %% Controlling Parameters of the GA Algorithm
 
-obj = @deneme;
+obj = @fitnessFunction;
 
 M = 10;   % number of chromosomes (candidate solutions)
 N = 4;    % number of genes(variables)
