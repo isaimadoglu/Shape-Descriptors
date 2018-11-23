@@ -1,30 +1,6 @@
-function [basariOrani] = deneme(kromozom)
+function [basariOrani] = fitnessFunction(kromozom)
+
 %% section1
-% orj_im=imread('images/.jpg');
-% gray_im=rgb2gray(orj_im);
-% gray_im2=gray_im;
-% indisler=find(gray_im<165);
-% gray_im2(indisler)=0;
-% bin_im=imbinarize(gray_im2);
-% bin_im_removed = bwareaopen(bin_im,40);
-% bw_img=1.-bin_im_removed;
-% bw_img=imfill(bw_img,'holes');
-% figure, imshow(bw_img);
-% 
-% stats = regionprops(bw_img,'Area','Eccentricity','Perimeter','EulerNumber');
-% vector=[stats.Area stats.Eccentricity stats.Perimeter stats.EulerNumber];
-
-%% section2
-% load fisheriris
-% X = meas;
-% Y = species;
-% 
-% mdl = fitcknn(X,Y,'NumNeighbors',5,'Standardize',1);
-% 
-% Xnew = [min(X);mean(X);max(X)];
-% [label,score,cost] = predict(mdl,Xnew)
-
-%% section3
 % image_folder='C:\Users\isaim\Documents\MATLAB\images';
 % file_names = dir(fullfile(image_folder,'*.jpg'));
 % total_images = numel(file_names);
@@ -48,7 +24,7 @@ function [basariOrani] = deneme(kromozom)
 % vector(n,:)=[ stats.Eccentricity];
 %    
 % end
-%% section4
+%% section2
 
 load etiketli_output.mat
 one_indices = find(kromozom(:)==1);
@@ -63,23 +39,23 @@ file_names = dir(fullfile(image_folder,'*.jpg'));
 total_images = numel(file_names);
 
 for n=1:total_images
-   f=fullfile(image_folder, file_names(n).name);
+    f=fullfile(image_folder, file_names(n).name);
     orj_im = imread(f);
-   gray_im=rgb2gray(orj_im);
-gray_im2=gray_im;
-indisler=find(gray_im<165);
-gray_im2(indisler)=0;
-bin_im=imbinarize(gray_im2);
-bin_im_removed = bwareaopen(bin_im,40);
-bw_img=1.-bin_im_removed;
-bw_img=imfill(bw_img,'holes');
-%figure, imshow(bw_img);
-
-stats = regionprops(bw_img,'Area','Eccentricity','Perimeter','EulerNumber');
-vector2(n,:)=[stats.Area stats.Eccentricity stats.Perimeter stats.EulerNumber];
-% stats = regionprops(bw_img,'Eccentricity');
-% vector2(n,:)=[ stats.Eccentricity];
-   
+    gray_im=rgb2gray(orj_im);
+    gray_im2=gray_im;
+    indisler=find(gray_im<165);
+    gray_im2(indisler)=0;
+    bin_im=imbinarize(gray_im2);
+    bin_im_removed = bwareaopen(bin_im,40);
+    bw_img=1.-bin_im_removed;
+    bw_img=imfill(bw_img,'holes');
+    %figure, imshow(bw_img);
+    
+    stats = regionprops(bw_img,'Area','Eccentricity','Perimeter','EulerNumber');
+    vector2(n,:)=[stats.Area stats.Eccentricity stats.Perimeter stats.EulerNumber];
+    % stats = regionprops(bw_img,'Eccentricity');
+    % vector2(n,:)=[ stats.Eccentricity];
+    
 end
 
 
