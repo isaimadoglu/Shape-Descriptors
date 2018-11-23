@@ -10,6 +10,10 @@ function [basariOrani] = fitnessFunction(kromozom)
 %     orj_im = imread(f);
 %    gray_im=rgb2gray(orj_im);
 % gray_im2=gray_im;
+% 
+% eta_mat = SI_moment(orj_im,gray_im2); 
+% hu_arr = Hu_Moments(eta_mat);
+% 
 % indisler=find(gray_im<165);
 % gray_im2(indisler)=0;
 % bin_im=imbinarize(gray_im2);
@@ -18,18 +22,17 @@ function [basariOrani] = fitnessFunction(kromozom)
 % bw_img=imfill(bw_img,'holes');
 % %figure, imshow(bw_img);
 % 
-% % stats = regionprops(bw_img,'Area','Eccentricity','Perimeter','EulerNumber');
-% % vector(n,:)=[stats.Area stats.Eccentricity stats.Perimeter stats.EulerNumber];
-% stats = regionprops(bw_img,'Eccentricity');
-% vector(n,:)=[ stats.Eccentricity];
+% 
+% stats = regionprops(bw_img,'Area','Eccentricity','Perimeter','EulerNumber');
+% vector(n,:)=[stats.Area stats.Eccentricity stats.Perimeter stats.EulerNumber];
 %    
 % end
 %% section2
 
-load etiketli_output.mat
+load etiketli_output2.mat
 one_indices = find(kromozom(:)==1);
 X=vector(1:19,one_indices);
-Y=vector(1:19,5);
+Y=vector(1:19,7);
 % X=vector(1:19,1);
 % Y=vector(1:19,2);
 Mdl = fitcknn(X,Y);  %BURADA HALLETTIK KARDES
@@ -43,6 +46,10 @@ for n=1:total_images
     orj_im = imread(f);
     gray_im=rgb2gray(orj_im);
     gray_im2=gray_im;
+    
+    eta_mat = SI_moment(orj_im,gray_im2);
+    hu_arr = Hu_Moments(eta_mat);
+    
     indisler=find(gray_im<165);
     gray_im2(indisler)=0;
     bin_im=imbinarize(gray_im2);
@@ -52,9 +59,10 @@ for n=1:total_images
     %figure, imshow(bw_img);
     
     stats = regionprops(bw_img,'Area','Eccentricity','Perimeter','EulerNumber');
-    vector2(n,:)=[stats.Area stats.Eccentricity stats.Perimeter stats.EulerNumber];
-    % stats = regionprops(bw_img,'Eccentricity');
-    % vector2(n,:)=[ stats.Eccentricity];
+    cevre= stats.Perimeter;
+alan = stats.Area;
+    compactness = 4*pi*alan/cevre^2;
+    vector2(n,:)=[stats.Area stats.Eccentricity stats.Perimeter stats.EulerNumber hu_arr(7) compactness];
     
 end
 
