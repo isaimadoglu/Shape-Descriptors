@@ -27,7 +27,7 @@ for n=1:total_images
     silme_sayisi= round(length(find(bw_img==1))/3);
     bw_img = bwareaopen(bw_img,silme_sayisi);
     
-        bw_img=imfill(bw_img,'holes');
+%        bw_img=imfill(bw_img,'holes');
          figure, imshow(bw_img); %figure
     
     
