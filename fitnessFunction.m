@@ -6,7 +6,7 @@ X=vector(1:19,one_indices);
 Y=vector(1:19,7);
 % X=vector(1:19,1);
 % Y=vector(1:19,2);
-Mdl = fitcknn(X,Y);  %BURADA HALLETTIK KARDES
+Mdl = fitcknn(X,Y);  % Datas are classed here.
 
 image_folder='C:\Users\isaim\Documents\MATLAB\images\test';
 file_names = dir(fullfile(image_folder,'*.jpg'));
