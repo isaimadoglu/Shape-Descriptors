@@ -33,17 +33,13 @@ for g = 2 : MaxGen
             % Mutation
             [child1]= mutation(child1, Pm);
             [child2]= mutation(child2, Pm);
-            disp(['sifir']);
         end
-        disp(['children', child1.Gene, child2.Gene]);
         newPopulation.Chromosomes(k).Gene = child1.Gene;
         newPopulation.Chromosomes(k+1).Gene = child2.Gene;
-        disp(['new pop chromosome', newPopulation.Chromosomes.Gene]);
         
     end  % end of Chromosomes loop
     
     for i = 1 : M
-        testt= sum(newPopulation.Chromosomes(i).Gene(:))
         newPopulation.Chromosomes(i).fitness=obj(population.Chromosomes(i).Gene(:));
     end
     
@@ -58,7 +54,7 @@ for i = 1 : M
     population.Chromosomes(i).fitness=obj(population.Chromosomes(i).Gene(:));
 end
 
-[max_val, indx]= sort([population.Chromosomes(:).fitness], 'descend');
+[~ , indx]= sort([population.Chromosomes(:).fitness], 'descend');
 
 BestChrom.Gene = population.Chromosomes(indx(1)).Gene;
 BestChrom.fitness = population.Chromosomes(indx(1)).fitness;
