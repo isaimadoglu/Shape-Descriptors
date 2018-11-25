@@ -68,9 +68,9 @@ end
 BestChrom.Gene = population.Chromosomes(indx(1)).Gene;
 BestChrom.fitness = population.Chromosomes(indx(1)).fitness;
 
-if globalBest>BestChrom.fitness
-    disp('Global Best is better than Best Chromosome.');
-end
+% if globalBest>BestChrom.fitness
+%     disp('Global Best is better than Best Chromosome.');
+% end
 
 
 end
