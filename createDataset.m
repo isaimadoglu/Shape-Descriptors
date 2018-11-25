@@ -13,6 +13,7 @@ for n=1:total_images
     %     figure, imshow(orj_im);
     
     gray_im=rgb2gray(orj_im);
+    zernike_im=gray_im; % for zernike
     gray_im2=gray_im;
     
     eta_mat = SI_moment(orj_im,gray_im2);
@@ -29,7 +30,11 @@ for n=1:total_images
     
 %        bw_img=imfill(bw_img,'holes');
          figure, imshow(bw_img); %figure
-    
+    %     Zernike Moment
+         n1 = 4; m = 2;           % Define the order and the repetition of the moment
+         p = zernike_im;
+         p = logical(not(p));
+         [~, AOH, PhiOH] = Zernikmoment(p,n1,m);     % Call Zernikemoment fuction  % horizontal
     
     stats = regionprops(bw_img,'Area','Eccentricity','Perimeter','EulerNumber');
     cevre= stats.Perimeter;
@@ -42,6 +47,6 @@ for n=1:total_images
     end
     label= label+1;
     
-    vector(n,:)=[stats.Area stats.Eccentricity stats.Perimeter stats.EulerNumber hu_arr(7) compactness etiket];
+    vector(n,:)=[stats.Area stats.Eccentricity stats.Perimeter stats.EulerNumber hu_arr(7) PhiOH compactness etiket];
     
 end
