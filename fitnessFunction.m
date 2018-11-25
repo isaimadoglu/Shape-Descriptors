@@ -20,13 +20,18 @@ for n=1:total_images
     eta_mat = SI_moment(orj_im,gray_im2);
     hu_arr = Hu_Moments(eta_mat);
     
-    indisler=find(gray_im<165);
+    indisler=find(gray_im<50);
     gray_im2(indisler)=0;
+    
     bin_im=imbinarize(gray_im2);
-    bin_im_removed = bwareaopen(bin_im,40);
-    bw_img=1.-bin_im_removed;
-    bw_img=imfill(bw_img,'holes');
-    %figure, imshow(bw_img);
+    bw_img=1.-bin_im;
+    %         figure, imshow(bw_img); %figure
+    silme_sayisi= round(length(find(bw_img==1))/3);
+    bw_img = bwareaopen(bw_img,silme_sayisi);
+    
+    %         bw_img=imfill(bw_img,'holes');
+    %          figure, imshow(bw_img); %figure
+    
     %      Zernike
          n1 = 4; m = 2;           % Define the order and the repetition of the moment
          p = zernike_im;
