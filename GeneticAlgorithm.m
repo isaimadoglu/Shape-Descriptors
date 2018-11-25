@@ -9,6 +9,15 @@ for i = 1 : M
     population.Chromosomes(i).fitness=obj(population.Chromosomes(i).Gene(:));
 end
 
+[max_val, indx]= sort([population.Chromosomes(:).fitness], 'descend');
+
+disp(['Generation #', num2str(1)]);
+globalBest= max_val(1);
+disp('Global Best Chromosome= ');
+disp(population.Chromosomes(indx(1)).Gene);
+disp('Global Best Fitness= ');
+disp(globalBest);
+
 %% Main loop
 for g = 2 : MaxGen
     disp(['Generation #', num2str(g)]);
@@ -44,7 +53,7 @@ for g = 2 : MaxGen
     end
     
     % Elitism
-    [ newPopulation ]= elitism(newPopulation, Er);
+    [ newPopulation, globalBest ]= elitism(newPopulation, Er, globalBest);
     
     population = newPopulation;
     
@@ -58,6 +67,10 @@ end
 
 BestChrom.Gene = population.Chromosomes(indx(1)).Gene;
 BestChrom.fitness = population.Chromosomes(indx(1)).fitness;
+
+if globalBest>BestChrom.fitness
+    disp('Global Best is better than Best Chromosome.');
+end
 
 
 end
