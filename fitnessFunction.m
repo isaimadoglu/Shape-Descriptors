@@ -1,11 +1,9 @@
 function [basariOrani] = fitnessFunction(kromozom)
 
-load etiketli_output2.mat
+load etiketli_output.mat
 one_indices = find(kromozom(:)==1);
-X=vector(1:19,one_indices);
-Y=vector(1:19,7);
-% X=vector(1:19,1);
-% Y=vector(1:19,2);
+X=vector(1:60,one_indices);
+Y=vector(1:60,7);
 Mdl = fitcknn(X,Y);  % Datas are classed here.
 
 image_folder='C:\Users\isaim\Documents\MATLAB\images\test';
@@ -43,9 +41,11 @@ one_indices = find(kromozom(:)==1);
 %vector2(:,one_indices)
 [label ,score,~]=predict(Mdl,vector2(:,one_indices));
 
-indicess = find(label(1:3)==1); % because the label of horses is 1
-basariOrani=(length(indicess)/3)*100; % my fitness value
-
+% indicess = find(label(14:16)==5);
+indicess = sum(length(find(label(1:3)==1))+length(find(label(4:6)==2))+length(find(label(7:10)==3))); % 
+indicess = sum(length(find(label(11:13)==4))+length(find(label(14:16)==5))+length(find(label(17:19)==6))) + indicess;
+basariOrani=(indicess/19)*100; % my fitness value
+% disp('sistim');
 %Mdl.ClassNames
 %Mdl.Prior
 end
