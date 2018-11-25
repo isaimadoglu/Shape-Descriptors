@@ -7,7 +7,7 @@ clearvars; clc;
 obj = @fitnessFunction;
 
 M = 10;   % number of chromosomes (candidate solutions)
-N = 6;    % number of genes(variables)
+N = 7;    % number of genes(variables)
 MaxGen = 4;
 Pc = 0.85;
 Pm = 0.01;
