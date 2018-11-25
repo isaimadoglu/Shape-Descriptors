@@ -3,7 +3,7 @@ function [basariOrani] = fitnessFunction(kromozom)
 load etiketli_output.mat
 one_indices = find(kromozom(:)==1);
 X=vector(1:60,one_indices);
-Y=vector(1:60,7);
+Y=vector(1:60,8);
 Mdl = fitcknn(X,Y);  % Datas are classed here.
 
 image_folder='C:\Users\isaim\Documents\MATLAB\images\test';
