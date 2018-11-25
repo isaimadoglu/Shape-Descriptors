@@ -6,7 +6,7 @@ X=vector(1:60,one_indices);
 Y=vector(1:60,8);
 Mdl = fitcknn(X,Y);  % Datas are classed here.
 
-image_folder='C:\Users\isaim\Documents\MATLAB\images\test';
+image_folder='C:\Users\isaim\Desktop\Shape-Descriptors-master\images\test';
 file_names = dir(fullfile(image_folder,'*.jpg'));
 total_images = numel(file_names);
 
